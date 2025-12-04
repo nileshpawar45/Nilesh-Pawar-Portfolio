@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nilesh Pawar | Full-Stack Java Developer Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /*
+         * CORE STYLES & VARIABLES
+         */
+        :root {
+            --color-dark-bg: #100a1f; /* Deep Violet/Dark Blue */
+            --color-primary: #8a2be2; /* BlueViolet (Purple) */
+            --color-secondary: #ff1493; /* DeepPink */
+            --color-neon-blue: #00ffff; /* Cyan/Aqua */
+            --color-neon-glow: #ff00ff; /* Magenta/Fuchsia */
+            --color-text-light: #f4f4f4;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--color-dark-bg);
+            color: var(--color-text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* -------------------------------------- */
+        /* UTILITY STYLES & GLASSMORPHISM */
+        /* -------------------------------------- */
+        .cta-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--color-primary);
+            color: var(--color-text-light);
+            text-decoration: none;
+            border: 2px solid var(--color-primary);
+            border-radius: 8px;
+            transition: all var(--transition-speed) ease-in-out;
+            box-shadow: 0 0 10px var(--color-primary);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            border-color: var(--color-neon-glow);
+            box-shadow: 0 0 20px var(--color-neon-glow), 0 0 40px var(--color-neon-glow);
+            transform: translateY(-2px);
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            padding: 30px;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        /* Section Entrance Animation (Fade-in on Scroll) */
+        .hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* -------------------------------------- */
+        /* NEW: Typing Effect CSS */
+        /* -------------------------------------- */
+        .typewriter-cursor {
+            border-right: 3px solid var(--color-neon-blue); /* The cursor */
+            animation: blink-caret 0.75s step-end infinite;
+            margin-left: 5px;
+            display: inline-block;
+        }
+        
+        /* Ensure the content areas are large enough even when empty to prevent layout shift */
+        #hero-title, #hero-subtitle {
+             min-height: 1.5em; 
+             display: block; /* Important for the p tag replacement to occupy space */
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--color-neon-blue); }
+        }
+
+        /* -------------------------------------- */
+        /* NAVIGATION */
+        /* -------------------------------------- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: rgba(16, 10, 31, 0.8);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--color-neon-blue);
+            text-decoration: none;
+            text-shadow: 0 0 5px var(--color-neon-blue);
+        }
+
+        .navbar a {
+            color: var(--color-text-light);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 1em;
+            padding: 5px 10px;
+            transition: color var(--transition-speed), text-shadow var(--transition-speed);
+        }
+
+        .navbar a:hover {
+            color: var(--color-neon-glow);
+            text-shadow: 0 0 10px var(--color-neon-glow);
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 100px 5% 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: var(--color-secondary);
+        }
+        
+        /* -------------------------------------- */
+        /* 1. HERO SECTION */
+        /* -------------------------------------- */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(16, 10, 31, 1) 0%, rgba(40, 0, 80, 0.5) 100%);
+        }
+        
+        /* REVERTED: Profile Icon in Hero Section back to a generic fa-user icon */
+        .hero-profile-icon {
+            font-size: 6em; /* Increased size for the icon */
+            color: var(--color-neon-blue);
+            text-shadow: 0 0 10px var(--color-neon-blue), 0 0 20px rgba(0, 255, 255, 0.5);
+            /* Make it look like a circular icon container */
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(138, 43, 226, 0.1);
+            box-shadow: 0 0 20px var(--color-primary);
+            margin: 0 auto 30px auto; /* Center it and add space below */
+        }
+
+
+        .hero-content h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--color-neon-blue), var(--color-neon-glow), var(--color-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+        
+        /* -------------------------------------- */
+        /* 2. ABOUT ME SECTION */
+        /* -------------------------------------- */
+        .profile-card {
+            display: block; /* Changed to block to flow vertically */
+            max-width: 600px; /* Reduced max width for single column content */
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent 0deg, transparent 90deg, var(--color-neon-blue) 180deg, var(--color-neon-glow) 270deg, var(--color-neon-blue) 360deg);
+            z-index: -1;
+            animation: rotateBorder 4s linear infinite;
+            opacity: 0.5;
+        }
+        
+        @keyframes rotateBorder {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Profile image styles removed as requested */
+        /* .profile-img-container {}
+        .profile-img {} */
+        
+        .bio-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .bio-content h2 {
+            margin-top: 0;
+            font-size: 1.8em;
+            color: var(--color-neon-blue);
+        }
+        
+        /* UPDATED: Styles for improved About Me text visibility and aesthetics */
+        .bio-content p {
+            margin-bottom: 10px;
+            color: #e0f7fa; /* Slightly brighter, light cyan/aqua color for visibility */
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.2); /* Subtle neon blue shadow */
+            font-size: 1.05em; /* Slightly larger font */
+        }
+        
+        .bio-content strong {
+            color: var(--color-neon-glow);
+        }
+
+        /* -------------------------------------- */
+        /* 3. SKILLS SECTION (3D CUBE) */
+        /* -------------------------------------- */
+        .cube-container {
+            width: 350px;
+            height: 350px;
+            margin: 50px auto;
+            perspective: 1000px;
+            position: relative;
+            animation: floatCube 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatCube {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+
+        .cube-shadow {
+            position: absolute;
+            width: 80%;
+            height: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            bottom: -20px;
+            left: 10%;
+            filter: blur(8px);
+            z-index: 0;
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transform: rotateX(-20deg) rotateY(45deg);
+            transition: transform 0.1s linear;
+        }
+
+        .cube.rotating {
+            animation: cubeRotate 20s linear infinite;
+        }
+
+        @keyframes cubeRotate {
+            from { transform: rotateX(-20deg) rotateY(0deg); }
+            to { transform: rotateX(-20deg) rotateY(360deg); }
+        }
+
+        .cube-face {
+            width: 350px;
+            height: 350px;
+            position: absolute;
+            background: rgba(138, 43, 226, 0.2);
+            border: 1px solid var(--color-primary);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            transition: background-color var(--transition-speed);
+        }
+        
+        /* Cube Face positioning (half the width/height = 175px) */
+        .cube-face.front { transform: rotateY(0deg) translateZ(175px); }
+        .cube-face.back { transform: rotateY(180deg) translateZ(175px); }
+        .cube-face.right { transform: rotateY(90deg) translateZ(175px); }
+        .cube-face.left { transform: rotateY(-90deg) translateZ(175px); }
+        .cube-face.top { transform: rotateX(90deg) translateZ(175px); }
+        .cube-face.bottom { transform: rotateX(-90deg) translateZ(175px); }
+
+        /* Skill Button Styles */
+        .skill-btn {
+            padding: 10px 18px;
+            font-size: 1.0em;
+            color: var(--color-text-light);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--color-neon-blue);
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 5px var(--color-neon-blue);
+            transition: all 0.2s ease;
+            text-shadow: 0 0 5px var(--color-neon-blue);
+            display: flex; /* For icon alignment */
+            align-items: center;
+            gap: 8px;
+        }
+        .skill-btn i {
+            font-size: 1.2em;
+            color: var(--color-secondary);
+        }
+
+        .skill-btn:hover {
+            background: var(--color-secondary);
+            border-color: var(--color-neon-glow);
+            box-shadow: 0 0 15px var(--color-neon-glow), 0 0 30px var(--color-neon-glow);
+            transform: scale(1.1);
+        }
+
+        .skill-btn.clicked {
+            animation: buttonClick 0.3s ease;
+        }
+
+        @keyframes buttonClick {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.9); box-shadow: 0 0 5px var(--color-secondary); }
+            100% { transform: scale(1.1); }
+        }
+
+        /* -------------------------------------- */
+        /* 4. PROJECTS SECTION */
+        /* -------------------------------------- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 50px;
+        }
+        
+        /* NEW KEYFRAMES for Project Pulse Animation */
+        @keyframes projectPulse {
+            0% { box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); }
+            50% { box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), 0 0 10px var(--color-primary); } /* Subtle glow */
+            100% { box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); }
+        }
+
+        .project-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 20px;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease-out, box-shadow 0.5s ease-out;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            text-align: left;
+            /* APPLIED ANIMATION HERE */
+            animation: projectPulse 4s ease-in-out infinite;
+        }
+
+        .project-card:hover {
+            transform: rotateY(5deg) rotateX(2deg) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7), 0 0 30px var(--color-neon-blue);
+            /* Pause pulse animation on hover */
+            animation-play-state: paused;
+        }
+        
+        /* UPDATED: Added scroll for project description */
+        .slideshow-container {
+            height: 180px; /* Maintains original height */
+            margin-top: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            font-style: italic;
+            border: 1px dashed var(--color-primary);
+            overflow-y: auto; /* KEY CHANGE: Enables vertical scrolling */
+            text-align: left;
+        }
+        .slideshow-container ul {
+            list-style: disc;
+            padding: 10px 25px;
+            font-size: 0.9em;
+            color: var(--color-text-light);
+        }
+
+        /* -------------------------------------- */
+        /* 5. EXPERIENCE SECTION */
+        /* -------------------------------------- */
+        .experience-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            max-width: 700px;
+            width: 100%;
+            overflow: hidden;
+            transition: all var(--transition-speed) ease-in-out;
+            cursor: pointer;
+            text-align: left;
+        }
+        .experience-card h3 {
+             color: var(--color-neon-blue);
+        }
+        .experience-card p {
+             font-size: 1.1em;
+             margin-bottom: 5px;
+        }
+
+        .experience-card .details {
+            max-height: 0;
+            opacity: 0;
+            padding-top: 0;
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-out, padding-top 0.5s ease-out;
+            color: var(--color-neon-glow);
+            font-size: 0.9em;
+            list-style: disc;
+            margin: 10px 0 0 20px;
+        }
+
+        .experience-card:hover {
+            box-shadow: 0 0 25px var(--color-secondary);
+            transform: translateY(-5px);
+        }
+
+        .experience-card:hover .details {
+            max-height: 300px;
+            opacity: 1;
+            padding-top: 15px;
+        }
+
+
+        /* -------------------------------------- */
+        /* 6. CERTIFICATES SECTION */
+        /* -------------------------------------- */
+        .certificates-grid {
+            display: flex;
+            gap: 30px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .certificate-card {
+            width: 280px;
+            height: 200px;
+            background: var(--glass-bg);
+            border: 1px solid var(--color-neon-blue);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+            transition: all 0.4s ease-out;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            padding: 15px;
+        }
+
+        /* Removed .certificate-card img styles as requested by user */
+        
+        .certificate-card p {
+            font-size: 1.05em;
+            font-weight: bold;
+            text-align: center;
+            color: var(--color-primary);
+        }
+        .certificate-card small {
+            font-size: 0.85em;
+            color: var(--color-secondary);
+            font-style: italic;
+        }
+
+        .certificate-card:hover {
+            transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) scale(1.05);
+            border-color: var(--color-neon-glow);
+            box-shadow: 0 0 20px var(--color-neon-glow), 0 0 40px var(--color-neon-glow);
+        }
+
+        /* -------------------------------------- */
+        /* 7. CONTACT SECTION (MODIFIED FOR GRID/CARD LAYOUT) */
+        /* -------------------------------------- */
+        
+        /* New wrapper for form and details to create a 2-column layout on larger screens */
+        .contact-wrapper {
+            display: flex;
+            flex-wrap: wrap; /* Allows stacking on small screens */
+            gap: 40px;
+            justify-content: center;
+            max-width: 900px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .contact-form-container {
+            flex: 1;
+            min-width: 300px; /* Minimum width for form */
+        }
+
+        .contact-section .glass-card {
+            max-width: none; /* Removed max-width for form inside wrapper */
+            width: 100%;
+        }
+
+        /* Redefine contact-info as a grid container for the contact items */
+        .contact-info {
+            flex: 1.2; /* Slightly more space for the contact links */
+            min-width: 300px; /* Minimum width for links */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive 2-column grid (2 applications per row) */
+            gap: 20px;
+            align-content: start; /* Align content to the top */
+        }
+
+        .contact-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--color-primary);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--color-neon-glow);
+            border-color: var(--color-neon-glow);
+        }
+
+        .contact-item i {
+            font-size: 2em; /* Larger icon */
+            margin-bottom: 8px;
+            color: var(--color-secondary);
+            width: auto;
+        }
+
+        .contact-item span {
+            font-size: 0.8em;
+            color: var(--color-text-light);
+        }
+
+        .contact-item a {
+            font-size: 1em;
+            font-weight: bold;
+            word-break: break-word;
+            color: var(--color-neon-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: var(--color-primary);
+        }
+
+        /* STYLING FOR THE CONTACT FORM INPUTS (From previous step, kept for quality) */
+        #contact-form input, 
+        #contact-form textarea {
+            width: 100%;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--color-primary); /* Primary border */
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.4); /* Dark, transparent background */
+            color: var(--color-text-light);
+            font-size: 1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            resize: vertical; /* Allow vertical resizing for textarea */
+        }
+        
+        #contact-form textarea {
+            min-height: 150px; /* Ensure textarea is tall enough */
+        }
+
+        #contact-form input:focus, 
+        #contact-form textarea:focus {
+            border-color: var(--color-neon-glow); /* Neon glow on focus */
+            outline: none;
+            box-shadow: 0 0 15px var(--color-neon-glow);
+            background: rgba(0, 0, 0, 0.6); /* Slightly darker on focus */
+        }
+
+        #contact-form input::placeholder,
+        #contact-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+        }
+        
+        /* Ensure the button uses full width of the form container */
+        #contact-form .cta-button {
+             width: 100%;
+             text-align: center;
+        }
+
+        /* Update responsiveness for the grid items to ensure they stack on very small screens */
+        @media (max-width: 650px) {
+            .contact-info {
+                grid-template-columns: 1fr; /* Single column on small screens */
+            }
+        }
+
+        /* -------------------------------------- */
+        /* FOOTER */
+        /* -------------------------------------- */
+        .footer {
+            padding: 20px 0;
+            text-align: center;
+            background: #0d0617;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* -------------------------------------- */
+        /* RESPONSIVENESS (EXISTING) */
+        /* -------------------------------------- */
+        @media (max-width: 768px) {
+            .navbar nav {
+                display: none;
+            }
+            .hero-content h1 {
+                font-size: 3em;
+            }
+            .profile-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            /* .profile-img-container removed */
+            .cube-container {
+                width: 300px;
+                height: 300px;
+            }
+            .cube-face {
+                width: 300px;
+                height: 300px;
+            }
+            .cube-face.front, .cube-face.back { transform: rotateY(0deg) translateZ(150px); }
+            .cube-face.right { transform: rotateY(90deg) translateZ(150px); }
+            .cube-face.left { transform: rotateY(-90deg) translateZ(150px); }
+            .cube-face.top { transform: rotateX(90deg) translateZ(150px); }
+            .cube-face.bottom { transform: rotateX(-90deg) translateZ(150px); }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2.5em;
+            }
+            .skill-btn {
+                font-size: 0.8em;
+                padding: 6px 10px;
+            }
+            .cube-container {
+                width: 250px;
+                height: 250px;
+            }
+            .cube-face {
+                width: 250px;
+                height: 250px;
+                gap: 10px;
+            }
+            .cube-face.front, .cube-face.back { transform: rotateY(0deg) translateZ(125px); }
+            .cube-face.right { transform: rotateY(90deg) translateZ(125px); }
+            .cube-face.left { transform: rotateY(-90deg) translateZ(125px); }
+            .cube-face.top { transform: rotateX(90deg) translateZ(125px); }
+            .cube-face.bottom { transform: rotateX(-90deg) translateZ(125px); }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="#home" class="logo">Nilesh Pawar</a>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#achievements">Achievements</a>
+            <a href="#certificates">Certificates</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <div class="hero-profile-icon"><i class="fa-solid fa-user"></i></div> <h1 id="hero-title"></h1> 
+                <p id="hero-subtitle"></p>
+                <a href="#projects" class="cta-button">View My Work</a>
+            </div>
+        </section>
+        
+        <hr>
+
+        <section id="about" class="about-section hidden">
+            <div class="glass-card profile-card">
+                <div class="bio-content">
+                    <h2>👋 About Me</h2>
+                    <p>I am a motivated **Java Full-Stack Developer** skilled in building end-to-end applications with **Java**, **SQL**, **JavaScript**, **React.js**, **HTML**, **CSS**, **Bootstrap**, and **MySQL**.</p>
+                    <p>My focus is on writing **clean, efficient, and scalable code** while building real-world projects, with strong fundamentals in backend development, frontend UI building, and database design.</p>
+                    
+                    <p><strong>Education:</strong> B.E. in Computer Science & Engineering</p>
+                    <p><strong>Institution:</strong> (2021–2025)</p>
+                    <p><strong>CGPA:</strong> 8.82</p>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="skills" class="skills-section hidden">
+            <h2>🧠 Technical Skills</h2>
+            <p>Drag the cube to explore my comprehensive tech stack.</p>
+            <div class="cube-container">
+                <div id="cube" class="cube">
+                    <div class="cube-face front">
+                        <button class="skill-btn" data-skill="Java (Core, OOP)"><i class="fa-brands fa-java"></i> Java (Core, OOP)</button>
+                        <button class="skill-btn" data-skill="JDBC"><i class="fa-solid fa-link"></i> JDBC</button>
+                        <button class="skill-btn" data-skill="REST Concepts"><i class="fa-solid fa-arrows-split-up-and-left"></i> REST Concepts</button>
+                    </div>
+                    <div class="cube-face back">
+                        <button class="skill-btn" data-skill="HTML5/CSS3"><i class="fa-brands fa-html5"></i> HTML5/CSS3</button>
+                        <button class="skill-btn" data-skill="JavaScript"><i class="fa-brands fa-js"></i> JavaScript</button>
+                        <button class="skill-btn" data-skill="React.js"><i class="fa-brands fa-react"></i> React.js</button>
+                        <button class="skill-btn" data-skill="Bootstrap"><i class="fa-brands fa-bootstrap"></i> Bootstrap</button>
+                    </div>
+                    <div class="cube-face right">
+                        <button class="skill-btn" data-skill="MySQL"><i class="fa-solid fa-database"></i> MySQL</button>
+                        <button class="skill-btn" data-skill="MVC Basics"><i class="fa-solid fa-layer-group"></i> MVC Basics</button>
+                    </div>
+                    <div class="cube-face left">
+                        <button class="skill-btn" data-skill="Git"><i class="fa-brands fa-git-alt"></i> Git</button>
+                        <button class="skill-btn" data-skill="GitHub"><i class="fa-brands fa-github"></i> GitHub</button>
+                        <button class="skill-btn" data-skill="IntelliJ IDEA"><i class="fa-solid fa-computer"></i> IntelliJ IDEA</button>
+                        <button class="skill-btn" data-skill="VS Code"><i class="fa-solid fa-code"></i> VS Code</button>
+                    </div>
+                    <div class="cube-face top">
+                        <button class="skill-btn" data-skill="MySQL Workbench"><i class="fa-solid fa-screwdriver-wrench"></i> MySQL Workbench</button>
+                        <button class="skill-btn" data-skill="Debugging"><i class="fa-solid fa-bug"></i> Debugging</button>
+                    </div>
+                    <div class="cube-face bottom">
+                        <button class="skill-btn" data-skill="Oracle SQL/PLSQL"><i class="fa-solid fa-database"></i> Oracle SQL/PLSQL</button>
+                        <button class="skill-btn" data-skill="Postman"><i class="fa-solid fa-terminal"></i> Postman</button>
+                    </div>
+                </div>
+                <div class="cube-shadow"></div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="projects" class="projects-section hidden">
+            <h2>🛠️ Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Abstractive Text Summarizer</h3>
+                    <p>**Technologies:** Deep Learning, Transformer Model (T5), NLP</p>
+                    <div class="slideshow-container">
+                        <ul>
+                            <li>Implemented a deep-learning-based summarizer using the **T5 Transformer model**.</li>
+                            <li>Designed the entire pipeline: preprocessing, tokenization, and summary generation.</li>
+                            <li>Focused on **coherence, readability**, and NLP best practices for quality output.</li>
+                            <li>Applied **attention-based sequence-to-sequence modeling**.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Bus Reservation System
+                        <a href="https://github.com/nileshpawar45/Bus-Resevration-system" target="_blank" style="color: var(--color-neon-blue); margin-left: 10px; font-size: 0.8em;"><i class="fa-brands fa-github"></i> View Code</a>
+                    </h3>
+                    <p>**Technologies:** Java, JDBC, MySQL, OOP</p>
+                    <div class="slideshow-container">
+                        <ul>
+                            <li>Built a complete backend system using Java, JDBC, and **MySQL**.</li>
+                            <li>Key modules implemented: **User Registration/Login, Bus Listing, Seat Booking, Cancellation**, and **Ticket Generation**.</li>
+                            <li>Designed the **SQL schema**, implemented relational tables, **CRUD operations**, validations, and exception handling.</li>
+                            <li>Designed using **modular OOP** and real-world booking logic.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Password Generator
+                        <a href="https://github.com/nileshpawar45/Password-Generator-" target="_blank" style="color: var(--color-neon-blue); margin-left: 10px; font-size: 0.8em;"><i class="fa-brands fa-github"></i> View Code</a>
+                    </h3>
+                    <p>**Technologies:** Core Java</p>
+                    <div class="slideshow-container">
+                        <ul>
+                            <li>Developed a secure password generator using Core Java principles.</li>
+                            <li>Generates **strong, randomized passwords** including letters (case-sensitive), numbers, and symbols.</li>
+                            <li>Focused on simplicity, utility, and security best practices.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="achievements" class="experience-section hidden">
+            <h2>⭐ Achievements & Training Highlights</h2>
+            
+            <div class="experience-card">
+                <h3><i class="fa-solid fa-flask" style="color: var(--color-secondary);"></i> Research Publication</h3>
+                <p style="font-size: 1.1em; color: var(--color-neon-glow); font-weight: bold; margin-bottom: 5px;">Enhancing Abstractive Text Summarization with Transformer Models: A Comparative Study</p>
+                <p style="margin-bottom: 10px;">Explored transformer-based models (like T5) to significantly improve the coherence and quality of abstractive text summarization. This research focused on advanced NLP techniques and model optimization.</p>
+                <p style="font-size: 0.9em; color: var(--color-neon-blue);">
+                    **Published in:** International Journal of Innovative Science and Research Technology (IJISRT), Volume 10, Issue 3, March 2025.
+                </p>
+                <p style="font-size: 0.9em; color: var(--color-neon-blue);">
+                    **Article Digital Number:** IJISRT25MAR1472
+                </p>
+            </div>
+
+            <div class="experience-card">
+                <h3>Performance Appreciation</h3>
+                <p>Recognized for performance during Core Java training at **FUEL**.</p>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="certificates" class="certificates-section hidden">
+            <h2>🏆 Professional Certifications</h2>
+            <div class="certificates-grid">
+                <div class="certificate-card">
+                    <p>Core Java Training</p>
+                    <small>FUEL</small>
+                </div>
+                <div class="certificate-card">
+                    <p>Java Programming Specialization</p>
+                    <small>Naresh IT</small>
+                </div>
+                <div class="certificate-card">
+                    <p>Programming in Java</p>
+                    <small>NPTEL</small>
+                </div>
+                 <div class="certificate-card">
+                    <p>HTML & CSS for Beginners</p>
+                    <small>Udemy</small>
+                </div>
+                 <div class="certificate-card">
+                    <p>Learning SQL Programming</p>
+                    <small>Udemy</small>
+                </div>
+                <div class="certificate-card">
+                    <p>Introduction to Web Design & Development</p>
+                    <small>Training Course</small>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="contact" class="contact-section hidden">
+    <h2><i class="fa-solid fa-address-book"></i> Get In Touch</h2>
+
+    <div class="contact-wrapper">
+
+        <!-- CONTACT INFORMATION -->
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Email Address</span>
+                <a href="mailto:np7472004@gmail.com">np7472004@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <i class="fa-brands fa-linkedin"></i>
+                <span>Connect on LinkedIn</span>
+                <a href="https://www.linkedin.com/in/nilesh-pawar-595681265">nilesh-pawar-595681265</a>
+            </div>
+            <div class="contact-item">
+                <i class="fa-brands fa-github"></i>
+                <span>View GitHub</span>
+                <a href="https://github.com/nileshpawar45">nileshpawar45</a>
+            </div>
+            <div class="contact-item">
+                <i class="fa-brands fa-facebook"></i>
+                <span>Facebook</span>
+                <a href="https://www.facebook.com/profile.php?id=100030709032368">nileshpawar45</a>
+            </div>
+            <div class="contact-item">
+                <i class="fa-brands fa-instagram"></i>
+                <span>Instagram</span>
+                <a href="https://www.instagram.com/mr.nilesh_pawar_01/?__pwa=1">mr.nilesh_pawar_01</a>
+            </div>
+        </div>
+
+        <!-- CONTACT FORM -->
+        <div class="contact-form-container">
+            <form 
+                action="https://api.web3forms.com/submit"
+                method="POST"
+                id="contact-form"
+                class="glass-card"
+            >
+                <input type="hidden" name="access_key" value="6d4fa11a-6c4c-4bc0-b10e-d7af0dbef76e">
+                <input type="hidden" name="redirect" value="https://web3forms.com/success">
+
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+
+                <button type="submit" class="cta-button">Send Message</button>
+            </form>
+        </div>
+
+    </div>
+</section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Nilesh Pawar's Portfolio. Built with pure HTML, CSS, & JavaScript.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- 1. SMOOTH SCROLLING ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // --- 2. SECTION ENTRANCE ANIMATION (FADE-IN ON SCROLL) ---
+            const sections = document.querySelectorAll('section');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        entry.target.classList.remove('hidden');
+                    } else if (entry.boundingClientRect.top > 0) {
+                         // Re-hide if scrolling up for a repeat effect
+                         entry.target.classList.remove('visible');
+                         entry.target.classList.add('hidden');
+                    }
+                });
+            }, observerOptions);
+
+            // Initialize all sections (except home) as hidden and observe them
+            sections.forEach(section => {
+                if (section.id !== 'home') {
+                    section.classList.add('hidden');
+                }
+                sectionObserver.observe(section);
+            });
+            
+            // --- 5. NEW: TYPEWRITER EFFECT LOGIC ---
+            function simpleTypewriter(text, element, speed, callback) {
+                let i = 0;
+                element.innerHTML = ""; // Clear content
+
+                const cursor = document.createElement('span');
+                cursor.className = 'typewriter-cursor';
+                element.appendChild(cursor);
+
+                function type() {
+                    if (i < text.length) {
+                        // Logic to handle HTML tags (like <strong>) for formatting
+                        let char = text.charAt(i);
+                        
+                        if (char === '<') {
+                            let endIndex = text.indexOf('>', i);
+                            if (endIndex !== -1) {
+                                let tag = text.substring(i, endIndex + 1);
+                                // Inject tag and reposition cursor
+                                element.innerHTML = element.innerHTML.replace('<span class="typewriter-cursor"></span>', '') + tag + '<span class="typewriter-cursor"></span>';
+                                i = endIndex + 1;
+                                setTimeout(type, 10); // Fast forward through tag
+                                return;
+                            }
+                        }
+
+                        // Append character before the cursor
+                        element.innerHTML = element.innerHTML.replace('<span class="typewriter-cursor"></span>', '') + char + '<span class="typewriter-cursor"></span>';
+                        i++;
+                        setTimeout(type, speed);
+                    } else {
+                        cursor.remove();
+                        if (callback) {
+                            setTimeout(callback, 500); // Wait 0.5s before next stage
+                        }
+                    }
+                }
+                type();
+            }
+            
+            function setupTypewriterEffect() {
+                // Texts containing bold tags for formatting
+                const nameText = "Hello, I'm <strong>Nilesh Pawar</strong>";
+                const designationText = "Java Full-Stack Developer focused on building <strong>clean, efficient, and scalable</strong> end-to-end applications.";
+
+                const titleElement = document.getElementById('hero-title');
+                const subtitleElement = document.getElementById('hero-subtitle');
+
+                if (!titleElement || !subtitleElement) return;
+                
+                // Start typing the name first, then the designation
+                simpleTypewriter(nameText, titleElement, 70, () => {
+                    simpleTypewriter(designationText, subtitleElement, 40);
+                });
+            }
+            
+            // Call the typewriter setup when the DOM is ready
+            setupTypewriterEffect();
+            
+            // --- 3. 3D CUBE INTERACTIVITY LOGIC ---
+            const cube = document.getElementById('cube');
+            if (cube) {
+                let isDragging = false;
+                let lastX, lastY;
+                let rotX = -20;
+                let rotY = 45;
+                const sensitivity = 0.5;
+
+                function updateCubeTransform() {
+                    cube.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+                }
+
+                cube.classList.add('rotating');
+
+                // --- DRAG START (Mouse) ---
+                cube.addEventListener('mousedown', (e) => {
+                    e.preventDefault();
+                    isDragging = true;
+                    lastX = e.clientX;
+                    lastY = e.clientY;
+                    cube.style.transition = 'none';
+                    cube.classList.remove('rotating');
+                });
+                
+                // --- DRAG START (Touch) ---
+                cube.addEventListener('touchstart', (e) => {
+                    const touch = e.touches[0];
+                    e.preventDefault();
+                    isDragging = true;
+                    lastX = touch.clientX;
+                    lastY = touch.clientY;
+                    cube.style.transition = 'none';
+                    cube.classList.remove('rotating');
+                });
+
+                // --- DRAG END (Mouse & Touch) ---
+                const stopDrag = () => {
+                    if (isDragging) {
+                        isDragging = false;
+                        cube.style.transition = 'transform 0.1s linear';
+                        setTimeout(() => {
+                            cube.classList.add('rotating');
+                        }, 100);
+                    }
+                };
+                document.addEventListener('mouseup', stopDrag);
+                document.addEventListener('touchend', stopDrag);
+
+                // --- DRAG MOVE (Mouse) ---
+                document.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    const deltaX = e.clientX - lastX;
+                    const deltaY = e.clientY - lastY;
+
+                    rotY += deltaX * sensitivity;
+                    rotX -= deltaY * sensitivity;
+
+                    updateCubeTransform();
+                    lastX = e.clientX;
+                    lastY = e.clientY;
+                });
+                
+                // --- DRAG MOVE (Touch) ---
+                document.addEventListener('touchmove', (e) => {
+                    if (!isDragging || e.touches.length === 0) return;
+                    const touch = e.touches[0];
+                    const deltaX = touch.clientX - lastX;
+                    const deltaY = touch.clientY - lastY;
+
+                    rotY += deltaX * sensitivity * 1.5;
+                    rotX -= deltaY * sensitivity * 1.5;
+
+                    updateCubeTransform();
+                    lastX = touch.clientX;
+                    lastY = touch.clientY;
+                });
+
+                // --- PAUSE ON HOVER (Mouse only) ---
+                cube.addEventListener('mouseenter', () => {
+                     if (!isDragging) {
+                        cube.classList.remove('rotating');
+                     }
+                });
+
+                cube.addEventListener('mouseleave', () => {
+                     if (!isDragging) {
+                        cube.classList.add('rotating');
+                     }
+                });
+
+                // --- SKILL BUTTON CLICK ANIMATION ---
+                document.querySelectorAll('.skill-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        this.classList.add('clicked');
+                        setTimeout(() => {
+                            this.classList.remove('clicked');
+                        }, 300);
+                    });
+                });
+            }
+
+            // *** IMPORTANT: REMOVED THE CONFLICTING FORM SUBMISSION JAVASCRIPT BLOCK HERE ***
+
+        });
+    </script>
+</body>
+</html>
